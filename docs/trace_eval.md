@@ -1,7 +1,7 @@
 # 📊 BÁO CÁO THU HOẠCH NGHIỆM THU BÀI LAB 3 (BƯỚC 3 — SUBMISSION ARTIFACT)
 
-> **Họ và Tên Học viên:** [Điền Họ và Tên]  
-> **Mã Sinh Viên / Mã Học viên:** [Điền MSSV]  
+> **Họ và Tên Học viên:** Nguyễn Thị Thuý Hiền 
+> **Mã Sinh Viên / Mã Học viên:** 2A202602896
 > **Chủ đề Lựa chọn:** Trợ lý Học vụ & Tra cứu Lịch thi VinUni
 
 ---
