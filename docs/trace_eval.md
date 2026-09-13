@@ -20,9 +20,9 @@
 
 ## 2. TRÍCH XUẤT KẾT QUẢ WATERFALL TRACE LOG
 
-> **Trạng thái nghiệm thu API thật:** Chưa thực hiện vì workspace chưa có file `.env` chứa Gemini/OpenAI API key hợp lệ. Đã kiểm thử offline thành công; cần chạy lại `python src/app.py --all` sau khi cấu hình key để thay trace bằng kết quả LLM thật trước khi nộp.
+> **Trạng thái nghiệm thu API thật:** Đã chạy thành công với `OpenAIProvider` và API key hợp lệ. Toàn bộ 5/5 test case đã thực thi; trace hiện tại được tạo từ phản hồi LLM thật.
 
-Đoạn trace tiêu biểu của TC04 (offline) chứng minh luồng ReAct đa bước Tra cứu → Đặt lịch → Final Answer:
+Đoạn trace tiêu biểu của TC04 chứng minh luồng ReAct đa bước Tra cứu → Đặt lịch → Final Answer:
 
 ```json
 [
@@ -41,7 +41,8 @@
         "gpa": 3.85,
         "advisor": "PGS.TS Nguyễn Văn A"
       }
-    }
+    },
+    "latency_ms": 1400.52
   },
   {
     "step": 2,
@@ -55,7 +56,8 @@
     "observation": {
       "status": "SUCCESS",
       "booking_id": "BK-SV2026001-99"
-    }
+    },
+    "latency_ms": 1120.58
   }
 ]
 ```
@@ -64,10 +66,10 @@
 
 ## 3. TỔNG KẾT KẾT QUẢ NGHIỆM THU & NỘP BÀI
 
-- [ ] Chưa thể xác nhận LLM API thật vì chưa có `.env` với API key hợp lệ. Cần thực hiện lại trước khi nộp bài.
-- **Tổng số Test Cases đã chạy thành công (offline):** 5 / 5 test cases.
-- **Số lượt gọi Tool qua MCP Server chính xác (offline):** 5 lượt.
-- **Kết quả đẩy Repo nộp bài:** [ ] Chưa Commit và Push; thực hiện sau khi bổ sung API key thật và chạy nghiệm thu.
+- [x] Đã xác nhận Agent chạy trên LLM API thật với OpenAI Provider.
+- **Tổng số Test Cases đã chạy thành công:** 5 / 5 test cases.
+- **Số lượt gọi Tool qua MCP Server chính xác:** 5 lượt.
+- **Kết quả đẩy Repo nộp bài:** [ ] Chờ commit và push trace nghiệm thu API thật.
 
 ---
 
