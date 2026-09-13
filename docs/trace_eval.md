@@ -69,7 +69,7 @@
 - [x] Đã xác nhận Agent chạy trên LLM API thật với OpenAI Provider.
 - **Tổng số Test Cases đã chạy thành công:** 5 / 5 test cases.
 - **Số lượt gọi Tool qua MCP Server chính xác:** 5 lượt.
-- **Kết quả đẩy Repo nộp bài:** [ ] Chờ commit và push trace nghiệm thu API thật.
+- **Kết quả đẩy Repo nộp bài:** [x] Đã commit và push mã nguồn, báo cáo, và trace nghiệm thu API thật lên GitHub cá nhân.
 
 ---
 
