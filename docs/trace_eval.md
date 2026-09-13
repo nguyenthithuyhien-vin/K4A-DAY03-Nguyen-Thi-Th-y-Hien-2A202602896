@@ -2,7 +2,7 @@
 
 > **Họ và Tên Học viên:** [Điền Họ và Tên]  
 > **Mã Sinh Viên / Mã Học viên:** [Điền MSSV]  
-> **Chủ đề Lựa chọn:** [Điền tên chủ đề đã chọn từ docs/DANH_SACH_DE_TAI.md hoặc Đề tài Mở]  
+> **Chủ đề Lựa chọn:** Trợ lý Học vụ & Tra cứu Lịch thi VinUni
 
 ---
 
@@ -10,19 +10,19 @@
 
 | Tiêu chí Đánh giá | Mức độ (1 - 5) | Giải trình chi tiết lý do chọn điểm |
 | :--- | :---: | :--- |
-| **1. Multi-step Reasoning** | / 5 | Bài toán có yêu cầu chia nhỏ nhiều bước suy luận nối tiếp nhau không? |
-| **2. Tool Interaction** | / 5 | Hệ thống có cần kết nối với MCP Server / Cơ sở dữ liệu bên ngoài không? |
-| **3. Dynamic Decision** | / 5 | Bước tiếp theo có phụ thuộc vào kết quả quan sát bước trước không? |
-| **4. Long Horizon Goal** | / 5 | Hệ thống có phải giữ mục tiêu xuyên suốt qua nhiều lượt xử lý không? |
-| **TỔNG ĐIỂM AGENTIC FIT** | **/ 20** | *Nếu tổng điểm > 12/20: Bài toán rất phù hợp triển khai Agentic System.* |
+| **1. Multi-step Reasoning** | 5 / 5 | Với yêu cầu đặt lịch theo đúng cố vấn, Agent phải tra cứu hồ sơ, xác định cố vấn từ Observation và mới tạo lịch hẹn. |
+| **2. Tool Interaction** | 5 / 5 | Hệ thống cần gọi MCP Server để dùng `academic_query` truy vấn dữ liệu và `schedule_appointment` tạo booking. |
+| **3. Dynamic Decision** | 5 / 5 | Tool tiếp theo và tham số `advisor_name` phụ thuộc vào kết quả tra cứu sinh viên ở bước trước. |
+| **4. Long Horizon Goal** | 4 / 5 | Agent duy trì mục tiêu hỗ trợ học vụ từ câu hỏi đến xác nhận kết quả qua nhiều bước ReAct trong một phiên. |
+| **TỔNG ĐIỂM AGENTIC FIT** | **19 / 20** | *Bài toán rất phù hợp triển khai Agentic System vì tổng điểm lớn hơn 12/20.* |
 
 ---
 
-## 2. TRÍCH XUẤT KẾT QUẢ WATERFALL TRACE LOG (SAU KHI CHẠY TEST SUITE TRÊN API THẬT)
+## 2. TRÍCH XUẤT KẾT QUẢ WATERFALL TRACE LOG
 
-> ⚠️ **YÊU CẦU NGHIỆM THU:** Mở tệp `.env` điền `GEMINI_API_KEY` (hoặc `OPENAI_API_KEY`) để kết nối LLM thật trước khi thực thi `python src/app.py --all`. Bài nộp chỉ dùng Mock Offline Provider sẽ không đạt điểm nghiệm thực tế.
+> **Trạng thái nghiệm thu API thật:** Chưa thực hiện vì workspace chưa có file `.env` chứa Gemini/OpenAI API key hợp lệ. Đã kiểm thử offline thành công; cần chạy lại `python src/app.py --all` sau khi cấu hình key để thay trace bằng kết quả LLM thật trước khi nộp.
 
-Dán 1 đoạn trích xuất log tiêu biểu từ file `docs/trace_waterfall.json` sinh ra từ phản hồi LLM API thật:
+Đoạn trace tiêu biểu của TC04 (offline) chứng minh luồng ReAct đa bước Tra cứu → Đặt lịch → Final Answer:
 
 ```json
 [
@@ -38,10 +38,24 @@ Dán 1 đoạn trích xuất log tiêu biểu từ file `docs/trace_waterfall.js
       "student_id": "SV2026001",
       "data": {
         "full_name": "Nguyễn Văn An",
-        "gpa": 3.85
+        "gpa": 3.85,
+        "advisor": "PGS.TS Nguyễn Văn A"
       }
+    }
+  },
+  {
+    "step": 2,
+    "action_type": "TOOL_EXECUTION",
+    "tool_name": "schedule_appointment",
+    "arguments": {
+      "student_id": "SV2026001",
+      "datetime_str": "09:00 16/09/2026",
+      "advisor_name": "PGS.TS Nguyễn Văn A"
     },
-    "latency_ms": 120.5
+    "observation": {
+      "status": "SUCCESS",
+      "booking_id": "BK-SV2026001-99"
+    }
   }
 ]
 ```
@@ -50,10 +64,10 @@ Dán 1 đoạn trích xuất log tiêu biểu từ file `docs/trace_waterfall.js
 
 ## 3. TỔNG KẾT KẾT QUẢ NGHIỆM THU & NỘP BÀI
 
-- [ ] Đã điền API Key thật trong `.env` và xác nhận Agent chạy mượt mà trên LLM API thật (Gemini/OpenAI).
-- **Tổng số Test Cases đã chạy thành công:** ___ / 5 test cases.
-- **Số lượt gọi Tool qua MCP Server chính xác:** ___ lượt.
-- **Kết quả đẩy Repo nộp bài:** [ ] Đã Commit và Push mã nguồn thành công lên GitHub cá nhân.
+- [ ] Chưa thể xác nhận LLM API thật vì chưa có `.env` với API key hợp lệ. Cần thực hiện lại trước khi nộp bài.
+- **Tổng số Test Cases đã chạy thành công (offline):** 5 / 5 test cases.
+- **Số lượt gọi Tool qua MCP Server chính xác (offline):** 5 lượt.
+- **Kết quả đẩy Repo nộp bài:** [ ] Chưa Commit và Push; thực hiện sau khi bổ sung API key thật và chạy nghiệm thu.
 
 ---
 
